@@ -40,6 +40,12 @@ deviceで実装
 | user_id         | reference | null: false |
 | categrys_id     | reference | null: false |
 
+## user_items テーブル
+| Column          | Type      | Options     |
+| --------------- | --------- | ----------- |
+| user_id         | reference | null: false |
+| item_id         | reference | null: false |
+
 
 ## item image
 active_storageで実装
