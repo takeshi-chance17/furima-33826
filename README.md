@@ -19,7 +19,7 @@
 deviceで実装
 
 ### Association
--belong_to :address
+-belongs_to :address
 -has_many  :items
 
 ## adress
@@ -32,9 +32,11 @@ deviceで実装
 | house_number  | string    | null: false |
 | building_name | string    |             |
 | user          | reference | null: false |
+| item          | reference | null: false |
 
 ### Association
--belong_to :users
+-belongs_to :users
+-belongs_to  :items
 
 ## items テーブル
 | Column          | Type      | Options     |
@@ -49,7 +51,8 @@ deviceで実装
 | categrys        | reference | null: false |
 
 ### Association
--has_many :users
+-has_many   :users
+-belongs_to :adress
 -belongs_to :categrys
 
 
