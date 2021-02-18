@@ -1,11 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# テーブル設計
 
-Things you may want to cover:
 
-* Ruby version
+# 更新あり
+## users テーブル
+| Column             | Type      | Options     |
+| ------------------ | --------- | ----------- |
+| email              | string    | null: false |
+| password           | string    | null: false |
+| encrypted_password | string    | null: false |
+| nickname           | string    | null: false |
+| last_name          | string    | null: false |
+| first_name         | string    | null: false |
+| last_name_read     | string    | null: false |
+| first_name_read    | string    | null: false |
+| birth_day          | int       | null: false |
+deviceで実装
 
 ### Association
 -belongs_to :address
@@ -27,15 +38,34 @@ Things you may want to cover:
 -belongs_to :users
 -belongs_to  :items
 
-* Database initialization
+## items テーブル
+| Column          | Type      | Options     |
+| --------------- | --------- | ----------- |
+| name            | string    | null: false |
+| description     | text      | null: false |
+| condition       | text      | null: false |
+| price           | int       | null: false |
+| status          | bool      | null: false |
+| delivary_fee    | bool      | null: false |
+| user            | reference | null: false |
+| categrys        | reference | null: false |
 
 ### Association
 -has_many   :users
 -belongs_to :adress
 -belongs_to :categrys
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## item image
+active_storageで実装
 
-* ...
+
+# 更新なし
+
+## categrys テーブル
+| Column       | Type      | Options     |
+| ------------ | --------- | ----------- |
+| name         | string    | null: false |
+
+### Association
+-belongs_to :items
