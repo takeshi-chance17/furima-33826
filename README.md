@@ -15,7 +15,7 @@
 | first_name         | string    | null: false |
 | last_name_read     | string    | null: false |
 | first_name_read    | string    | null: false |
-| birth_day          | int       | null: false |
+| birth_day          | date      | null: false |
 deviceで実装
 
 ### Association
