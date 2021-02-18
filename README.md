@@ -53,7 +53,7 @@ deviceで実装
 ### Association
 -has_many   :users
 -belongs_to :adress
--belongs_to :categrys
+-belongs_to :categries
 
 
 ## item image
