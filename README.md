@@ -5,17 +5,16 @@
 
 # 更新あり
 ## users テーブル
-| Column             | Type      | Options      |
-| ------------------ | --------- | ------------ |
-| email              | string    | unique: true |
-|                    |           | null: false  |
-| encrypted_password | string    | null: false  |
-| nickname           | string    | null: false  |
-| last_name          | string    | null: false  |
-| first_name         | string    | null: false  |
-| last_name_read     | string    | null: false  |
-| first_name_read    | string    | null: false  |
-| birth_day          | date      | null: false  |
+| Column             | Type      | Options     |
+| ------------------ | --------- | ----------- |
+| email              | string    | unique: true, null: false |
+| encrypted_password | string    | null: false |
+| nickname           | string    | null: false |
+| last_name          | string    | null: false |
+| first_name         | string    | null: false |
+| last_name_read     | string    | null: false |
+| first_name_read    | string    | null: false |
+| birth_day          | date      | null: false |
 
 ### Association
 - has_many  :items
@@ -32,7 +31,7 @@
 | delivary_fee_id | integer   | null: false |  配送料の負担
 | category_id     | integer   | null: false |  カテゴリー
 | prefecture_id   | integer   | null: false |  発送元の地域
-| user            | reference | null: false |  出品者名
+| user            | reference | null: false, foreign_key: true |  出品者名
 
 ### Association
 - belongs_to   :user
@@ -47,9 +46,9 @@
 | city          | string    | null: false |  市町村
 | house_number  | string    | null: false |  番地
 | building_name | string    |             |  建物名
+| buy_history   | reference | null: false |  購入履歴
 
 ### Association
-- belongs_to  :item
 - belongs_to  :buy_history
 
 
