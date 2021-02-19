@@ -46,7 +46,7 @@
 | city          | string    | null: false |  市町村
 | house_number  | string    | null: false |  番地
 | building_name | string    |             |  建物名
-| buy_history   | reference | null: false |  購入履歴
+| buy_history   | reference | null: false, foreign_key: true |  購入履歴
 
 ### Association
 - belongs_to  :buy_history
@@ -55,8 +55,8 @@
 ## buy_historyテーブル(購入履歴)
 | Column          | Type      | Options     |
 | --------------- | --------- | ----------- |
-| item            | reference | null: false |
-| user            | reference | null: false |
+| item            | reference | null: false, foreign_key: true |
+| user            | reference | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
