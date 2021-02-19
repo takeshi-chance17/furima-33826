@@ -18,7 +18,7 @@
 
 ### Association
 - has_many  :items
-- has_many  :buy_history
+- has_many  :buy_histories
 
 ## items テーブル
 | Column          | Type      | Options     |
