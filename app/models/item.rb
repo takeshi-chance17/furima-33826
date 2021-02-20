@@ -7,10 +7,18 @@ class Item < ApplicationRecord
     belongs_to :status
     has_one_attached :image
 
+    with_options presence: true do
+        validates :name
+        validates :description
+        validates :price
+    end
+
     #ジャンルの選択が「--」の時は保存できないようにする
-    validates :category_id, numericality: { other_than: 1 }
-    validates :condition_id, numericality: { other_than: 1 }
-    validates :prefecture_id, numericality: { other_than: 1 }
-    validates :delivery_fee_id, numericality: { other_than: 1 }
-    validates :status_id, numericality: { other_than: 1}
+    with_options numericality: { other_than: 1 } do
+        validates :category_id
+        validates :condition_id
+        validates :prefecture_id
+        validates :delivery_fee_id
+        validates :status_id
+    end
 end
