@@ -32,12 +32,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include 'Price Half-width number'
       end
       it 'priceが300より小さい値では登録できない' do
-        @item.price = '299'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include 'Price Out of setting range'
       end
       it 'priceが9999999より大きい値では登録できない' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include 'Price Out of setting range'
       end
@@ -52,27 +52,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include 'Price Out of setting range'
       end
       it 'status_idが空では登録できない' do
-        @item.status_id = '1'
+        @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include 'Status Select'
       end
       it 'condition_idが空では登録できない' do
-        @item.condition_id = '1'
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include 'Condition Select'
       end
       it 'delivery_fee_idが空では登録できない' do
-        @item.delivery_fee_id = '1'
+        @item.delivery_fee_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include 'Delivery fee Select'
       end
       it 'category_idが空では登録できない' do
-        @item.category_id = '1'
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include 'Category Select'
       end
       it 'prefecture_idが空では登録できない' do
-        @item.prefecture_id = '1'
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include 'Prefecture Select'
       end
