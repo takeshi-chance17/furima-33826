@@ -28,7 +28,7 @@
 | price           | integer   | null: false |  販売価格
 | status_id       | integer   | null: false |  発送までの日数
 | condition_id    | integer   | null: false |  商品の状態
-| delivary_fee_id | integer   | null: false |  配送料の負担
+| delivery_fee_id | integer   | null: false |  配送料の負担
 | category_id     | integer   | null: false |  カテゴリー
 | prefecture_id   | integer   | null: false |  発送元の地域
 | user            | reference | null: false, foreign_key: true |  出品者名
