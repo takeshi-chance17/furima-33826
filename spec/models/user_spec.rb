@@ -30,14 +30,14 @@ RSpec.describe User, type: :model do
       it 'emailが＠を含まなければ登録できないこと' do
         @user.email = 'test1234'
         @user.valid?
-        expect(@user.errors.full_messages).to include "Email is invalid"
+        expect(@user.errors.full_messages).to include 'Email is invalid'
       end
       it 'emailが重複したメールアドレスでは登録できないこと' do
         @user.save
         @another = FactoryBot.build(:user)
         @another.email = @user.email
         @another.valid?
-        expect(@another.errors.full_messages).to include "Email has already been taken"
+        expect(@another.errors.full_messages).to include 'Email has already been taken'
       end
       it 'passwordが空では登録できない' do
         @user.password = ''
@@ -48,23 +48,23 @@ RSpec.describe User, type: :model do
         @user.password = 'test1'
         @user.password_confirmation = 'test1'
         @user.valid?
-        expect(@user.errors.full_messages).to include "Password is too short (minimum is 6 characters)"
+        expect(@user.errors.full_messages).to include 'Password is too short (minimum is 6 characters)'
       end
       it 'passwordが英語のみでは登録できないこと' do
         @user.password = 'abcdef'
         @user.password_confirmation = 'abcdef'
         @user.valid?
-        expect(@user.errors.full_messages).to include "Password is invalid. Input half-width alphanumeric characters."
+        expect(@user.errors.full_messages).to include 'Password is invalid. Input half-width alphanumeric characters.'
       end
       it 'passwordが数字のみでは登録できないこと' do
         @user.password = '123456'
         @user.valid?
-        expect(@user.errors.full_messages).to include "Password is invalid. Input half-width alphanumeric characters."
+        expect(@user.errors.full_messages).to include 'Password is invalid. Input half-width alphanumeric characters.'
       end
       it 'passwordが全角では登録できないこと' do
         @user.password = 'ＡＢＣＤＥＦ'
         @user.valid?
-        expect(@user.errors.full_messages).to include "Password is invalid. Input half-width alphanumeric characters."
+        expect(@user.errors.full_messages).to include 'Password is invalid. Input half-width alphanumeric characters.'
       end
       it 'password_confirmationがpasswordと異なっていたら登録できない' do
         @user.password_confirmation = ''
