@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :new]
-  before_action :set_item, only: [:show, :edit]
+  before_action :authenticate_user!, only: [:create, :new, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update]
   before_action :move_index, only: [:edit, :update]
 
   def index
@@ -28,7 +28,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to item_path(@item.id)
     else
@@ -49,13 +48,8 @@ class ItemsController < ApplicationController
   end
 
   def move_index
-    @login_user = Item.find(params[:id])
-    unless user_signed_in? then
-      redirect_to new_user_session_path
-    else
-      unless @login_user.user.id == current_user.id then
-        redirect_to root_path
-      end
+    unless @item.user.id == current_user.id then
+      redirect_to root_path
     end
   end
 end
