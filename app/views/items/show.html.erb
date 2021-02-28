@@ -7,12 +7,10 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
-      <% @buyhistry.length.times do |h| %>
-        <% if @buyhistry[h].item_id == @item.id %>
-          <div class="sold-out">
-            <span>Sold Out!!</span>
-          </div>
-        <% end %>
+      <% if @item.buy_history != nil %>
+        <div class="sold-out">
+          <span>Sold Out!!</span>
+        </div>
       <% end %>
     </div>
     <div class="item-price-box">
@@ -25,20 +23,14 @@
     </div>
 
     <% if user_signed_in? %>
-      <% flag = true %>
-      <% @buyhistry.length.times do |h| %>
-        <% if @buyhistry[h].item_id == @item.id %>
-          <% flag = false %>
-        <% end %>
-      <% end %>
       <% if current_user.id == @item.user.id %>
-        <% if flag %>
+        <% if @item.buy_history == nil %>
           <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
           <p class="or-text">or</p>
           <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
         <% end %>
       <% else %>
-        <% if flag %>
+        <% if @item.buy_history == nil %>
           <%= link_to "購入画面に進む", item_buyers_path(@item.id), method: :get, class:"item-red-btn"%>
         <% end %>
       <% end %>

@@ -4,8 +4,8 @@ class BuyerItem < ApplicationController
   attr_accessor :token, :phone_number, :postal_code, :prefecture_id, :city, :house_number, :building_name, :user_id, :item_id
 
   with_options presence: true do
-    validates :phone_number, numericality: { message: 'Half-width number' }
-    validates :postal_code,     numericality: { message: 'Half-width number' }
+    validates :phone_number,    numericality: { message: 'Half-width number' }, length: { in: 10..11, message: 'Out of setting range' }
+    validates :postal_code,     format: { with: /\A[0-9]{3}-[0-9]{4}\z/ }
     validates :city,            format: { with: /\A[ぁ-んァ-ヶ一-龥々]/, message: 'is invalid. Input full-width characters.' }
     validates :house_number
     validates :token

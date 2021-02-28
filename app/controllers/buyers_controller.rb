@@ -28,11 +28,8 @@ class BuyersController < ApplicationController
   end
 
   def sale_confirmation
-    h = BuyHistory.all
-    h.length.times do |i|
-      if @item.id == h[i].item_id
-        redirect_to root_path
-      end
+    if @item.buy_history != nil
+      redirect_to root_path
     end
   end
 

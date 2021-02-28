@@ -3,7 +3,16 @@ require 'rails_helper'
 RSpec.describe BuyerItem, type: :model do
   before do
     @buyer = FactoryBot.build(:buyer)
+    @user = FactoryBot.build(:user)
+    @item = FactoryBot.build(:item)
+    @user.save
+    @item.save
+    @buyer.user_id = @user.id
+    @buyer.item_id = @item.id
+    # sqlとのアクセスに若干時間がかかるみたい
+    sleep(0.1)
   end
+
   describe '商品購入機能' do
     context '購入できる時' do
       it '全ての情報が正常に入力されている' do
@@ -26,16 +35,21 @@ RSpec.describe BuyerItem, type: :model do
         @buyer.valid?
         expect(@buyer.errors.full_messages).to include 'Phone number Half-width number'
       end
+      it 'phone_numberは12桁以上だと登録できない' do
+        @buyer.phone_number = '123456789012'
+        @buyer.valid?
+        expect(@buyer.errors.full_messages).to include 'Phone number Out of setting range'
+      end
       # postal_code
       it 'postal_codeが空では購入できない' do
         @buyer.postal_code = nil
         @buyer.valid?
         expect(@buyer.errors.full_messages).to include "Postal code can't be blank"
       end
-      it 'postal_codeが半角数字以外では購入できない' do
-        @buyer.postal_code = nil
+      it 'postal_codeはハイフンがない場合は登録できない' do
+        @buyer.postal_code = '9990000'
         @buyer.valid?
-        expect(@buyer.errors.full_messages).to include 'Postal code Half-width number'
+        expect(@buyer.errors.full_messages).to include 'Postal code is invalid'
       end
       # prefecture_id
       it 'prefecture_idが空では購入できない' do
