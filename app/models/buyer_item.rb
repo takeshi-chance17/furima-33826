@@ -4,10 +4,11 @@ class BuyerItem < ApplicationController
     attr_accessor :token, :phone_number, :postal_code, :prefecture_id, :city, :house_number, :building_name
 
     with_options presence: true do
-        validates :phone_number, numericality: { message: 'Half-width number' }
-        validates :postal_code, numericality: { message: 'Half-width number' }
-        validates :city, format: {with: /\A[ぁ-んァ-ヶ一-龥々]/, message: "is invalid. Input full-width characters."}
+        validates :phone_number,    numericality: { message: 'Half-width number' }
+        validates :postal_code,     numericality: { message: 'Half-width number' }
+        validates :city,            format: {with: /\A[ぁ-んァ-ヶ一-龥々]/, message: "is invalid. Input full-width characters."}
         validates :house_number
+        validates :token
     end
 
     # ジャンルの選択が「--」の時は保存できないようにする

@@ -19,7 +19,7 @@ class BuyersController < ApplicationController
             @buyer_item.save(current_user.id, @item.id)
             return redirect_to root_path
         else
-            render :index
+            render :index, model: @buyer_item
         end
     end
 

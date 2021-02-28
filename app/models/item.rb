@@ -1,6 +1,5 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  attr_accessor :token
 
   belongs_to :category
   belongs_to :condition

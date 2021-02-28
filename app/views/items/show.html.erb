@@ -31,10 +31,14 @@
         <p class="or-text">or</p>
         <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
       <% else %>
+        <% flag = true %>
         <% @buyhistry.length.times do |h| %>
-          <% if @buyhistry[h].id != @item.id %>
-            <%= link_to "購入画面に進む", buyers_path(@item.id), method: :get, class:"item-red-btn"%>
+          <% if @buyhistry[h].id == @item.id %>
+            <% flag = false %>
           <% end %>
+        <% end %>
+        <% if flag %>
+          <%= link_to "購入画面に進む", buyers_path(@item.id), method: :get, class:"item-red-btn"%>
         <% end %>
       <% end %>
     <% end %>
