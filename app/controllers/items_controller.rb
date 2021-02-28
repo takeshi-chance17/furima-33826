@@ -1,8 +1,9 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_buyhistry, only: [:index, :show]
+  before_action :set_buyhistry, only: [:index, :show, :edit]
   before_action :move_index, only: [:edit, :update, :destroy]
+  before_action :selling_confirmation, only: [:edit]
 
   def index
     @items = Item.order(created_at: :desc)
@@ -62,5 +63,13 @@ class ItemsController < ApplicationController
 
   def move_index
     redirect_to root_path unless @item.user.id == current_user.id
+  end
+
+  def selling_confirmation
+    @buyhistry.length.times do |h|
+      if @item.id == @buyhistry[h].item_id
+        redirect_to root_path
+      end
+    end
   end
 end

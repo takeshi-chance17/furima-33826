@@ -1,5 +1,4 @@
 <%= render "shared/header" %>
-
 <%# 商品の概要 %>
 <div class="item-show">
   <div class="item-box">
@@ -26,17 +25,19 @@
     </div>
 
     <% if user_signed_in? %>
-      <% if current_user.id == @item.user.id %>
-        <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
-        <p class="or-text">or</p>
-        <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
-      <% else %>
-        <% flag = true %>
-        <% @buyhistry.length.times do |h| %>
-          <% if @buyhistry[h].item_id == @item.id %>
-            <% flag = false %>
-          <% end %>
+      <% flag = true %>
+      <% @buyhistry.length.times do |h| %>
+        <% if @buyhistry[h].item_id == @item.id %>
+          <% flag = false %>
         <% end %>
+      <% end %>
+      <% if current_user.id == @item.user.id %>
+        <% if flag %>
+          <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
+          <p class="or-text">or</p>
+          <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
+        <% end %>
+      <% else %>
         <% if flag %>
           <%= link_to "購入画面に進む", buyers_path(@item.id), method: :get, class:"item-red-btn"%>
         <% end %>

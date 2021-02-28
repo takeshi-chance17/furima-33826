@@ -1,6 +1,7 @@
 class BuyersController < ApplicationController
   before_action :set_item, only: [:index, :create]
   before_action :sign_in_confirmation, only: [:index, :create]
+  before_action :user_confirmation, only: [:index, :create]
 
   def index
     @buyer_item = BuyerItem.new
@@ -46,6 +47,12 @@ class BuyersController < ApplicationController
 
   def sign_in_confirmation
     unless user_signed_in?
+      redirect_to root_path
+    end
+  end
+
+  def user_confirmation
+    if current_user.id == @item.user_id
       redirect_to root_path
     end
   end
