@@ -3,7 +3,7 @@ class BuyersController < ApplicationController
 
   def index
     @buyer_item = BuyerItem.new
-    @item = Item.find_by(params['item_id'])
+    @item = Item.find(params[:format])
   end
 
   def create

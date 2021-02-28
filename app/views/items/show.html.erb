@@ -9,7 +9,7 @@
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
       <% @buyhistry.length.times do |h| %>
-        <% if @buyhistry[h].id == @item.id %>
+        <% if @buyhistry[h].item_id == @item.id %>
           <div class="sold-out">
             <span>Sold Out!!</span>
           </div>
@@ -33,7 +33,7 @@
       <% else %>
         <% flag = true %>
         <% @buyhistry.length.times do |h| %>
-          <% if @buyhistry[h].id == @item.id %>
+          <% if @buyhistry[h].item_id == @item.id %>
             <% flag = false %>
           <% end %>
         <% end %>
