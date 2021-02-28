@@ -6,7 +6,6 @@ class User < ApplicationRecord
   has_many :buy_histories
   has_many :items
 
-
   with_options presence: true do
     validates :password,
               format: { with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}/,
