@@ -1,7 +1,7 @@
 class BuyerItem < ApplicationController
   include ActiveModel::Model
   extend ActiveHash::Associations::ActiveRecordExtensions
-  attr_accessor :token, :phone_number, :postal_code, :prefecture_id, :city, :house_number, :building_name
+  attr_accessor :token, :phone_number, :postal_code, :prefecture_id, :city, :house_number, :building_name, :user_id, :item_id
 
   with_options presence: true do
     validates :phone_number, numericality: { message: 'Half-width number' }
@@ -9,6 +9,8 @@ class BuyerItem < ApplicationController
     validates :city,            format: { with: /\A[ぁ-んァ-ヶ一-龥々]/, message: 'is invalid. Input full-width characters.' }
     validates :house_number
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   # ジャンルの選択が「--」の時は保存できないようにする

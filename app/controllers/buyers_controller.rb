@@ -11,12 +11,7 @@ class BuyersController < ApplicationController
   def create
     @buyer_item = BuyerItem.new(buyer_params)
     if @buyer_item.valid?
-      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-      Payjp::Charge.create(
-        amount: @item.price,
-        card: buyer_params[:token],
-        currency: 'jpy'
-      )
+      payjp_proc
       @buyer_item.save(current_user.id, @item.id)
       redirect_to root_path
     else
@@ -29,7 +24,7 @@ class BuyersController < ApplicationController
   def buyer_params
     params.require(:buyer_item).permit(:phone_number, :postal_code,
                                        :prefecture_id, :city, :house_number,
-                                       :building_name).merge(token: params[:token])
+                                       :building_name).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id])
   end
 
   def sale_confirmation
@@ -42,7 +37,7 @@ class BuyersController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:format])
+    @item = Item.find(params[:item_id])
   end
 
   def sign_in_confirmation
@@ -55,5 +50,14 @@ class BuyersController < ApplicationController
     if current_user.id == @item.user_id
       redirect_to root_path
     end
+  end
+
+  def payjp_proc
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: buyer_params[:token],
+      currency: 'jpy'
+    )
   end
 end

@@ -66,6 +66,18 @@ RSpec.describe BuyerItem, type: :model do
         @buyer.valid?
         expect(@buyer.errors.full_messages).to include "Token can't be blank"
       end
+      # user_id
+      it 'user_idが空では購入できない' do
+        @buyer.user_id = nil
+        @buyer.valid?
+        expect(@buyer.errors.full_messages).to include "User can't be blank"
+      end
+      # item_id
+      it 'item_idが空では購入できない' do
+        @buyer.item_id = nil
+        @buyer.valid?
+        expect(@buyer.errors.full_messages).to include "Item can't be blank"
+      end
     end
   end
 end
