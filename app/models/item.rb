@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   belongs_to :delivery_fee
   belongs_to :status
   belongs_to :user
-
+  has_one :buy_history
   has_one_attached :image
 
   validates :price, numericality: { message: 'Half-width number' }
