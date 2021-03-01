@@ -14,7 +14,6 @@ const pay = () => {
             exp_year: `20${formData.get("buyer_item[exp_year]")}`,
         };
 
-        console.log(card)
         Payjp.createToken(card, (status, response) => {
             if (status == 200) {
                 const token = response.id;
@@ -22,7 +21,6 @@ const pay = () => {
                 const tokenObj = `<input value=${token} name='token' type="hidden"> `;
                 renderDom.insertAdjacentHTML("beforeend", tokenObj);
             }
-            console.log(status)
             document.getElementById("card-number").removeAttribute("name");
             document.getElementById("card-cvc").removeAttribute("name");
             document.getElementById("card-exp-month").removeAttribute("name");
