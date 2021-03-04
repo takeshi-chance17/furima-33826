@@ -66,10 +66,8 @@ class ItemsController < ApplicationController
   end
 
   def selling_confirmation
-    @buyhistry.length.times do |h|
-      if @item.id == @buyhistry[h].item_id
-        redirect_to root_path
-      end
+    if @item.buyhistry != nil
+      redirect_to root_path
     end
   end
 end
